@@ -24,6 +24,7 @@
     name: docker
     state: started
     enabled: true
+  when: on_my_mac == false
 
 - name: Ensure dependencies are installed (Debian).
   ansible.builtin.apt:
@@ -57,6 +58,8 @@
     name: "{{ ansible_user }}"
     groups: docker
     append: true
+  when: on_my_mac == false
+
 
 # reset_connection doesn't support conditionals.
 - name: Reset connection so docker group is picked up.
